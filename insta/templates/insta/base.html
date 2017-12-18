@@ -1,5 +1,5 @@
 <!-- {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'insta/style.css' %}" /> {% if latest_question_list %} {% extends 'base.html' %} {% block content %} -->
+<link rel="stylesheet" type="text/css" href="{% static 'insta/style.css' %}" /> {% if latest_question_list %} -->
 {% extends 'base.html' %} {% block content %}
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %} {{ form.as_p }}
