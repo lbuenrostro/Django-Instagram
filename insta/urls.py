@@ -4,4 +4,5 @@ from django.urls import path
 app_name = 'insta'
 urlpatterns = [
     path('add/', views.model_form_upload, name="base"),
+    path('feed/', views.show_feed, name="feed"),
 ]

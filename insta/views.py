@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import DocumentForm
+from insta import models
 
 # from .forms import UploadFileForm
 
@@ -15,9 +16,14 @@ def model_form_upload(request):
     form = DocumentForm(request.POST, request.FILES)
     if form.is_valid():
         form.save()
-        return redirect(world(request))
+        return redirect('insta:feed')
     else:
         return render(request, 'insta/add_pic.html', {'form': form})
+
+
+def show_feed(request):
+    pictures = models.DocumentForm.objects.all()
+    return render(request, 'insta/feed.html', {'pictures': pictures})
 
 
 # def upload_pic(request):
