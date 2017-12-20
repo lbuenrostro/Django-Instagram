@@ -1,10 +1,10 @@
 from django import forms
-from uploads.core.models import Document
+from .models import DocumentForm
 
 
 class DocumentForm(forms.ModelForm):
     class Meta:
-        model = Document
+        model = DocumentForm
         fields = ('description', 'photo')
 
 
