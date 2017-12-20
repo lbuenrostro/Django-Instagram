@@ -1,3 +1,6 @@
-{% extends 'insta/base.html' %} {% block content %} {% if pictures %} {{ pictures }} {% else %}
+{% extends 'insta/base.html' %} {% load static %}
+<p>hello world!</p>
+{% block content %} {% if pictures %} {% for picture in pictures %}
+<img src="{% static picture %}"> {% endfor %} {% else %}
 <p>no pictures or sean messed up :'(</p>
 {% endif %} {% endblock %}
