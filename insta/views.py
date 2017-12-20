@@ -22,20 +22,12 @@ def model_form_upload(request):
 
 
 def show_feed(request):
-    pictures = models.DocumentForm.objects.all()
+    # data = models.DocumentForm.objects.all()
+    # pictures = []
+    # for picture in data:
+    #     pictures.append(picture.photo.url.replace('insta/static', ''))
+    pictures = [
+        picture.photo.url.replace('insta/static', '')
+        for picture in models.DocumentForm.objects.all()
+    ]
     return render(request, 'insta/feed.html', {'pictures': pictures})
-
-
-# def upload_pic(request):
-#     if request.method == 'POST':
-#         form = UploadForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             m = ExampleModel.objects.get(pk=course_id)
-#             m.model_pic = form.cleaned_data['image']
-#             m.save()
-#             return HttpResponse('image upload success')
-#         else:
-#             return (request, '/feed', {'form': form})
-#     return HttpResponseForbidden('allowed only via POST')
-
-# def upload_filters(request):
