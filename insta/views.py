@@ -5,8 +5,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .forms import DocumentForm
 from insta import models
 
-# from .forms import UploadFileForm
-
 
 def world(request):
     HttpResponse('world')

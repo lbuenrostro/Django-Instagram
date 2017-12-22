@@ -1,8 +1,33 @@
-body {
-    background-color: rgb(211, 187, 187);
+.container {
+    margin-bottom: 20px;
+    background-color: rgb(148, 137, 137);
     font-family: 'Berkshire Swash', cursive;
+    border-radius: 12px;
 }
 h1 {
+    font-size: 3em;
     text-align: center;
-    color: white;
+    color: rgb(77, 48, 48);
+    /* color: white; */
+}
+
+.photo-div {
+    text-align: center;
+}
+
+img {
+    max-width: 400px;
+    max-height: 400px;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+body {
+    background-color: rgb(104, 86, 86);
+    font-family: 'Berkshire Swash', cursive;
+}
+
+.fa-instagram {
+    color: rgb(63, 36, 36);
+    font-size: 1.5em;
 }

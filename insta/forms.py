@@ -8,6 +8,6 @@ class DocumentForm(forms.ModelForm):
         fields = ('description', 'photo')
 
 
-class UploadForm(forms.Form):
-    """Image upload form."""
-    image = forms.ImageField()
+# class UploadForm(forms.Form):
+#     image = forms.ImageField()
+#     description = forms.CharField()
