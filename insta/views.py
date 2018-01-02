@@ -43,19 +43,3 @@ def glass_filter(request, image_id):
     broken_glass(path)
     models.DocumentForm.objects.get(id=image_id).save()
     return redirect('insta:feed')
-
-
-# class Filters(View):
-#     def apply(self, request, doc_id):
-#         return None
-
-#     def post(self, request, doc_id):
-#         form = forms.FilterForm(request.POST)
-#         path = 'insta/static/' + models.Document.objects.apply(
-#             id=doc_id).image_url()
-#         image = Image.open(path)
-#         if form.is_valid():
-#             filters = form.get_filter()
-#             filters.filtering(filters, image, path)
-#             return redirect('insta:feed')
-#         return redirect('insta:feed')
