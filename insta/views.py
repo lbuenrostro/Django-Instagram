@@ -4,28 +4,58 @@ from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import DocumentForm
 from insta import models
+from PIL import Image, ImageFilter
+from insta.imagefilters import convert_grayscale, broken_glass
 
 
+# just a little test function when things go awry
 def world(request):
-    HttpResponse('world')
+    HttpResponse('hello world. happy new year. peace on earth.')
 
 
+# upload an image
 def model_form_upload(request):
     form = DocumentForm(request.POST, request.FILES)
     if form.is_valid():
         form.save()
         return redirect('insta:feed')
-    else:
-        return render(request, 'insta/add_pic.html', {'form': form})
+    return render(request, 'insta/add_pic.html', {'form': form})
 
 
+# exaple of how to do it filters on view
 def show_feed(request):
-    # data = models.DocumentForm.objects.all()
-    # pictures = []
-    # for picture in data:
-    #     pictures.append(picture.photo.url.replace('insta/static', ''))
-    pictures = [
-        picture.photo.url.replace('insta/static', '')
-        for picture in models.DocumentForm.objects.all()
-    ]
+    pictures = [{
+        'url': picture.photo.url.replace('insta/static', ''),
+        'id': picture.id
+    } for picture in models.DocumentForm.objects.all()][::-1]
     return render(request, 'insta/feed.html', {'pictures': pictures})
+
+
+def grey_filter(request, image_id):
+    path = models.DocumentForm.objects.get(id=image_id).photo.path
+    convert_grayscale(path)
+    models.DocumentForm.objects.get(id=image_id).save()
+    return redirect('insta:feed')
+
+
+def glass_filter(request, image_id):
+    path = models.DocumentForm.objects.get(id=image_id).photo.path
+    broken_glass(path)
+    models.DocumentForm.objects.get(id=image_id).save()
+    return redirect('insta:feed')
+
+
+# class Filters(View):
+#     def apply(self, request, doc_id):
+#         return None
+
+#     def post(self, request, doc_id):
+#         form = forms.FilterForm(request.POST)
+#         path = 'insta/static/' + models.Document.objects.apply(
+#             id=doc_id).image_url()
+#         image = Image.open(path)
+#         if form.is_valid():
+#             filters = form.get_filter()
+#             filters.filtering(filters, image, path)
+#             return redirect('insta:feed')
+#         return redirect('insta:feed')
