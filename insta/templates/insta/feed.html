@@ -2,7 +2,13 @@
 <div class="row">
     {% if pictures %} {% for picture in pictures %}
     <div class="col-lg-12 photo-div">
-        <img src="{% static picture %}">
+        <img src="{% static picture.url %}?t={% now 'u' %}">
+        <a href="{% url 'insta:grey' picture.id %}">
+            <button>black &amp; white</button>
+        </a>
+        <a href="{% url 'insta:glass' picture.id %}">
+            <button>broken glass</button>
+        </a>
     </div>
     {% endfor %} {% else %}
     <p>no pictures or sean messed up :'(</p>
