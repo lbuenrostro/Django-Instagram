@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .forms import DocumentForm
 from insta import models
 from PIL import Image, ImageFilter
-from insta.imagefilters import convert_grayscale, broken_glass
+from insta.imagefilters import convert_grayscale, broken_glass, rain_fall
 
 
 # just a little test function when things go awry
@@ -22,7 +22,7 @@ def model_form_upload(request):
     return render(request, 'insta/add_pic.html', {'form': form})
 
 
-# exaple of how to do it filters on view
+# example of how to do it filters on view
 def show_feed(request):
     pictures = [{
         'url': picture.photo.url.replace('insta/static', ''),
@@ -42,4 +42,16 @@ def glass_filter(request, image_id):
     path = models.DocumentForm.objects.get(id=image_id).photo.path
     broken_glass(path)
     models.DocumentForm.objects.get(id=image_id).save()
+    return redirect('insta:feed')
+
+
+def rain_filter(request, image_id):
+    path = models.DocumentForm.objects.get(id=image_id).photo.path
+    rain_fall(path)
+    models.DocumentForm.objects.get(id=image_id).save()
+    return redirect('insta:feed')
+
+
+def remove(request, image_id):
+    models.DocumentForm.objects.get(id=image_id).delete()
     return redirect('insta:feed')
