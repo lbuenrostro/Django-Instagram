@@ -21,6 +21,9 @@
         <a href="{% url 'insta:delete' picture.id %}">
             <button>Remove</button>
         </a>
+        <a href="{% url 'insta:filter' picture.id %}">
+            <button>Filter</button>
+        </a>
     </div>
 
     {% endfor %} {% else %}
