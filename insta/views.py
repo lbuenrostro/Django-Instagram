@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .forms import DocumentForm
 from insta import models
 from PIL import Image, ImageFilter
-from insta.imagefilters import convert_grayscale, broken_glass, rain_fall
+from insta.imagefilters import convert_grayscale, broken_glass, rain_fall, fire_all
 
 
 # just a little test function when things go awry
@@ -48,6 +48,13 @@ def glass_filter(request, image_id):
 def rain_filter(request, image_id):
     path = models.DocumentForm.objects.get(id=image_id).photo.path
     rain_fall(path)
+    models.DocumentForm.objects.get(id=image_id).save()
+    return redirect('insta:feed')
+
+
+def fire_filter(request, image_id):
+    path = models.DocumentForm.objects.get(id=image_id).photo.path
+    fire_all(path)
     models.DocumentForm.objects.get(id=image_id).save()
     return redirect('insta:feed')
 
