@@ -10,4 +10,5 @@ urlpatterns = [
     path('filter/rain/<image_id>', views.rain_filter, name='rain'),
     path('filter/fire/<image_id>', views.fire_filter, name='fire'),
     path('delete/<image_id>', views.remove, name='delete'),
+    path('filter/<image_id>', views.Apply_Filter.as_view(), name='filter'),
 ]
