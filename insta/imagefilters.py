@@ -130,8 +130,6 @@ def fire_all(path, side=800):
     for i in range(n):
         t = pixel_data[i]
         r, g, b = t
-        # new_data.append((max(0, int(r - 255 * (i**2 / n**2))), max(
-        #     0, int(r - 255 * (i**2 / n**2))), b))
         new_data.append((r, max(0, int(r - 255 * (i**2 / n**2))), max(
             0, int(b - 255 * (i**2 / n**2)))))
 
