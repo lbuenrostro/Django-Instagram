@@ -66,19 +66,19 @@ def remove(request, image_id):
 
 
 class Apply_Filter(View):
-    def get_pic(self, request, image_id):
+    def get(self, request, image_id):
         form = FiltersForm()
         path = 'insta/static/', models.DocumentForm.objects.get(
             id=image_id).image_url()
         return render(request, 'insta/feed.html', {'form': form})
 
-    def post_pic(self, request, image_id):
+    def post(self, request, image_id):
         form = FiltersForm(request.POST)
         path = 'insta/static/' + models.DocumentForm.objects.get(
             id=image_id).image_url()
         image = Image.open(path)
         if form.is_valid():
             f = form.apply_filter()
-            image.convert('RGB').Filter(f).save(path)
+            image.convert('RGB').filter(f).save(path)
             return redirect('insta:feed')
         return render(request, 'insta/filter-image.html', {'form': form})
