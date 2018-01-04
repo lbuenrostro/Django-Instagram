@@ -7,24 +7,30 @@
 
     <div class="col-md-4 col-md-offset-4">
         <a href="{% url 'insta:grey' picture.id %}">
-            <button>black &amp; white</button>
+            <button class="btn">SAD</button>
         </a>
         <a href="{% url 'insta:glass' picture.id %}">
-            <button>broken glass</button>
+            <button class="btn">BROKEN</button>
         </a>
         <a href="{% url 'insta:rain' picture.id %}">
-            <button>rain fall</button>
+            <button class="btn">CALM</button>
         </a>
         <a href="{% url 'insta:fire' picture.id %}">
-            <button>Fire</button>
+            <button class="btn">ANGER</button>
         </a>
         <a href="{% url 'insta:delete' picture.id %}">
-            <button>Remove</button>
+            <button class="btn" id="special">Remove</button>
         </a>
-        <a href="{% url 'insta:filter' picture.id %}">
-            <button>Filter</button>
-        </a>
+        <form action="{% url 'insta:filter' picture.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button class="btn" id="special" type="submit">Filter</button>
+        </form>
+        <form action="{% url 'insta:add' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button class="btn" id="special" type="submit">Add Image</button>
+        </form>
     </div>
+
 
     {% endfor %} {% else %}
     <p>no pictures or liza messed up :'(</p>
