@@ -5,7 +5,12 @@
     border-radius: 12px;
 }
 h1 {
-    font-size: 3em;
+    font-size: 4em;
+    text-align: center;
+    color: white;
+}
+h2 {
+    font-size: 2em;
     text-align: center;
     color: white;
 }
@@ -48,4 +53,16 @@ i,
 input {
     font-size: 20px;
     color: rgb(77, 48, 48);
+}
+
+.btn {
+    background-color: rgb(148, 137, 137);
+    color: rgb(77, 48, 48);
+    font-size: 12px;
+}
+
+#special {
+    color: rgb(255, 255, 255);
+    background-color: rgb(77, 48, 48);
+    font-size: 13px;
 }
