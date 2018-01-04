@@ -65,6 +65,19 @@ def remove(request, image_id):
     return redirect('insta:feed')
 
 
+class AddImage(View):
+    def get(self, request):
+        form = DocumentForm(request.POST, request.FILES)
+        return render(request, 'insta/add.html', {'form': form})
+
+    def post(self, request):
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('insta:feed')
+        return render(request, 'insta/add.html', {'form': form})
+
+
 class Apply_Filter(View):
     def get(self, request, image_id):
         form = FiltersForm()
