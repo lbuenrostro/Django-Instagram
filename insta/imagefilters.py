@@ -28,6 +28,7 @@ def broken_glass(path):
     image = Image.new('RGB', (w, h))
     image.putdata(new_data)
     image = resizeimage.resize_cover(image, [800, 800], validate=False)
+    image = image.convert('RGB')
 
     finalimage = Image.blend(image, glass, .3)
     finalimage.save(path)
@@ -149,6 +150,8 @@ def main():
     )
     grey.show()
 
+
+# path('filter/rain/<image_id>', views.rain_filter, name='rain'),
 
 if __name__ == '__main__':
     main()
