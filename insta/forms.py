@@ -1,5 +1,5 @@
 from django import forms
-from .models import DocumentForm
+from .models import DocumentForm, Comment
 from PIL import Image, ImageFilter
 
 
@@ -31,3 +31,15 @@ class FiltersForm(forms.Form):
             'SMOOTH_MORE': ImageFilter.SMOOTH_MORE,
             'SHARPEN': ImageFilter.SHARPEN
         }.get(self.cleaned_data['filters'], None)
+
+
+class CommentForm(forms.Form):
+    comment = forms.CharField()
+
+    def __init__(self, document=None, *args, **kargs):
+        super().__init__(*args, **kargs)
+        self.document = document
+
+    def saveComment(self):
+        return self.document.comment_set.create(
+            comment=self.cleaned_data['comment'])
