@@ -7,3 +7,8 @@ class DocumentForm(models.Model):
 
     def image_url(self):
         return self.photo.url[len('insta/images/'):]
+
+
+class Comment(models.Model):
+    comment = models.CharField(max_length=255, blank=True)
+    document = models.ForeignKey(DocumentForm, on_delete=models.CASCADE)
